@@ -49,6 +49,7 @@ export function TaskList() {
 
         <ul className={style.taskItemsArrangement}>
           <TaskItem />
+          <TaskItem />
         </ul>
       </main>
     </section>

@@ -1,4 +1,5 @@
 // Components
+import { Footer } from "./components/Footer/Footer";
 import { Header } from "./components/Header/Header";
 import { TaskList } from "./components/TaskList/TaskList";
 
@@ -10,6 +11,7 @@ export function App() {
     <>
       <Header />
       <TaskList />
+      <Footer />
     </>
   )
 };
