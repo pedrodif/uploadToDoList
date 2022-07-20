@@ -4,14 +4,18 @@ import style from "./taskItem.module.scss";
 // Assets
 import { Trash } from "phosphor-react";
 
-export function TaskItem() {
+interface ITaskProps{
+  id?: number;
+  content?: string;
+}
+
+export function TaskItem({ content } : ITaskProps) {
   return (
     <li className={style.taskItem}>
       <div className={style.taskContainer}>
         <input type="radio" />
         <p>
-          Integer urna interdum massa libero auctor neque turpis turpis semper.
-          Duis vel sed fames integer.
+          {content}
         </p>
         <Trash
           className={style.icon}

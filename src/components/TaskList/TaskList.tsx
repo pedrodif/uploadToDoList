@@ -1,3 +1,6 @@
+// Packages
+import { ChangeEvent, useState } from "react";
+
 // Components
 import { TaskItem } from "../TaskItem/TaskItem";
 
@@ -8,12 +11,40 @@ import style from "./taskList.module.scss";
 import { PlusCircle } from "phosphor-react";
 import { Clipboard } from "../../assets/Clipboard";
 
+interface ITask {
+  id: number;
+  content: string;
+}
+
+
 export function TaskList() {
+  const [tasks, setTasks] = useState<ITask[]>([]);
+  const [newTaskContent, setNewTaskContent] = useState('');
+
+  function handleCreateNewTask() {
+    if(newTaskContent.trim()){
+      const newTask = {
+        id: Math.random(),
+        content: newTaskContent,
+      }
+      setTasks([...tasks, newTask]);
+    }
+    setNewTaskContent('');
+  }
+
   return (
     <section className={style.taskListContainer}>
       <header className={style.taskListHeader}>
-        <input type="text" placeholder="Adicione uma nova tarefa" />
-        <button type="submit">
+        <input
+          type="text"
+          placeholder="Adicione uma nova tarefa"
+          onChange={(e) => setNewTaskContent(e.target.value) }
+          value={newTaskContent}
+        />
+        <button
+          type="submit"
+          onClick={handleCreateNewTask}
+        >
           Criar
           <PlusCircle size={20} />
         </button>
@@ -48,10 +79,20 @@ export function TaskList() {
         </div>
 
         <ul className={style.taskItemsArrangement}>
-          <TaskItem />
-          <TaskItem />
+        {tasks.map(task => {
+          return (
+            <TaskItem
+              key={task.id}
+              content={task.content}
+            />
+          )
+        })}
         </ul>
       </main>
     </section>
   );
 }
+function value(value: any): void {
+  throw new Error("Function not implemented.");
+}
+
