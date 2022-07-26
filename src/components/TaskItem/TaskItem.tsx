@@ -5,13 +5,19 @@ import style from "./taskItem.module.scss";
 import { Trash } from "phosphor-react";
 
 interface ITaskProps{
-  id?: number;
-  content?: string;
+  key: number;
+  id: number;
+  content: string;
+  onDeleteTaskItem: (key: number) => void;
 }
 
-export function TaskItem({ content } : ITaskProps) {
+export function TaskItem({ key, id, content, onDeleteTaskItem } : ITaskProps) {
+  function handleDeleteTaskItem(id : number) {
+    onDeleteTaskItem(id);
+  }
+
   return (
-    <li className={style.taskItem}>
+    <li key={key} className={style.taskItem}>
       <div className={style.taskContainer}>
         <input type="radio" />
         <p>
@@ -20,6 +26,7 @@ export function TaskItem({ content } : ITaskProps) {
         <Trash
           className={style.icon}
           size={18}
+          onClick={() => handleDeleteTaskItem(id)}
         />
       </div>
     </li>

@@ -13,5 +13,5 @@ export function App() {
       <TaskList />
       <Footer />
     </>
-  )
-};
+  );
+}

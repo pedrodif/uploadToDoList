@@ -16,20 +16,24 @@ interface ITask {
   content: string;
 }
 
-
 export function TaskList() {
   const [tasks, setTasks] = useState<ITask[]>([]);
-  const [newTaskContent, setNewTaskContent] = useState('');
+  const [newTaskContent, setNewTaskContent] = useState("");
 
   function handleCreateNewTask() {
-    if(newTaskContent.trim()){
+    if (newTaskContent.trim()) {
       const newTask = {
         id: Math.random(),
         content: newTaskContent,
-      }
-      setTasks([...tasks, newTask]);
+      };
+      setTasks((oldState) => [...oldState, newTask]);
     }
-    setNewTaskContent('');
+    setNewTaskContent("");
+  }
+
+  function deleteTaskItem(id: number) {
+    const tasksAfterRemoval = tasks.filter((task) => task.id !== id);
+    setTasks(tasksAfterRemoval);
   }
 
   return (
@@ -38,13 +42,10 @@ export function TaskList() {
         <input
           type="text"
           placeholder="Adicione uma nova tarefa"
-          onChange={(e) => setNewTaskContent(e.target.value) }
+          onChange={(e) => setNewTaskContent(e.target.value)}
           value={newTaskContent}
         />
-        <button
-          type="submit"
-          onClick={handleCreateNewTask}
-        >
+        <button type="submit" onClick={handleCreateNewTask}>
           Criar
           <PlusCircle size={20} />
         </button>
@@ -69,24 +70,22 @@ export function TaskList() {
 
         <div className={style.emptyList}>
           <Clipboard />
-          <strong>
-            Você ainda não tem tarefas cadastradas
-          </strong>
+          <strong>Você ainda não tem tarefas cadastradas</strong>
 
-          <p>
-            Crie tarefas e organize seus itens a fazer
-          </p>
+          <p>Crie tarefas e organize seus itens a fazer</p>
         </div>
 
         <ul className={style.taskItemsArrangement}>
-        {tasks.map(task => {
-          return (
-            <TaskItem
-              key={task.id}
-              content={task.content}
-            />
-          )
-        })}
+          {tasks.map((task) => {
+            return (
+              <TaskItem
+                key={task.id}
+                id={task.id}
+                content={task.content}
+                onDeleteTaskItem={deleteTaskItem}
+              />
+            );
+          })}
         </ul>
       </main>
     </section>
@@ -95,4 +94,3 @@ export function TaskList() {
 function value(value: any): void {
   throw new Error("Function not implemented.");
 }
-
