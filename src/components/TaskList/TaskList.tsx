@@ -28,7 +28,7 @@ export function TaskList() {
       const newTask = {
         id: Math.random(),
         content: newTaskContent,
-        isComplete: false
+        isComplete: false,
       };
       setTasks((oldState) => [...oldState, newTask]);
     }
@@ -49,6 +49,7 @@ export function TaskList() {
     setTasks(updateTasks);
   }
 
+  const showEmptyMessage = tasks.length === 0;
   // Render
   return (
     <section className={style.taskListContainer}>
@@ -82,12 +83,20 @@ export function TaskList() {
           </span>
         </div>
 
-        <div className={style.emptyList}>
-          <Clipboard />
-          <strong>Você ainda não tem tarefas cadastradas</strong>
+        <section
+          className={
+            showEmptyMessage
+              ? style.emptyListContainer
+              : style.emptyListContainerHidden
+          }
+        >
+          <div className={style.emptyList}>
+            <Clipboard />
+            <strong>Você ainda não tem tarefas cadastradas</strong>
 
-          <p>Crie tarefas e organize seus itens a fazer</p>
-        </div>
+            <p>Crie tarefas e organize seus itens a fazer</p>
+          </div>
+        </section>
 
         <ul className={style.taskItemsArrangement}>
           {tasks.map((task) => {
@@ -97,8 +106,8 @@ export function TaskList() {
                 id={task.id}
                 content={task.content}
                 onDeleteTaskItem={deleteTaskItem}
-                isComplete={false}
                 onToggleChange={toggleChange}
+                isComplete
               />
             );
           })}
@@ -107,4 +116,3 @@ export function TaskList() {
     </section>
   );
 }
-

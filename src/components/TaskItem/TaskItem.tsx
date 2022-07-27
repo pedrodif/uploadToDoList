@@ -8,8 +8,8 @@ interface ITaskProps {
   key: number;
   id: number;
   content: string;
-  onDeleteTaskItem: (key: number) => void;
   isComplete: boolean;
+  onDeleteTaskItem: (key: number) => void;
   onToggleChange: (id: number) => void;
 }
 
@@ -17,8 +17,8 @@ export function TaskItem({
   key,
   id,
   content,
-  onDeleteTaskItem,
   isComplete,
+  onDeleteTaskItem,
   onToggleChange,
 }: ITaskProps) {
   // Functions
@@ -38,14 +38,12 @@ export function TaskItem({
           style.isComplete ? "completed" : ""
         }`}
       >
-        <label>
+        <label className={style.checkboxContainer}>
           <input
-            className={style.checkbox}
             type="checkbox"
-            // readOnly
-            checked={isComplete}
             onClick={() => handleToggleTaskCompletion(id)}
           />
+          <span className={style.checkmark}></span>
         </label>
 
         <p>{content}</p>

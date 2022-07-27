@@ -1,13 +1,6 @@
-.taskItem{
+.taskItem {
   list-style: none;
   width: 100%;
-
-  &.completed {
-    p {
-      text-decoration:line-through;
-      opacity: 0.6;
-    }
-  }
 
   .taskContainer {
     height: 4.5rem;
@@ -22,27 +15,66 @@
     border-radius: 8px;
     margin-bottom: 1.25rem;
 
-    .checkbox{
-      border: solid 1px;
-      border-radius: 50%;
-      cursor: pointer;
+    .checkboxContainer {
+      input {
+        cursor: pointer;
+
+        &:checked {
+          & ~ .checkmark {
+            background-color: var(--purpleDark);
+          }
+
+          & ~ .checkmark:after {
+            display: block;
+          }
+        }
+      }
+
+      .checkmark {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 16px;
+        height: 16px;
+        background-color: var(--white);
+        outline: none;
+        border-radius: 20px;
+
+        &:after {
+          content: "";
+          position: absolute;
+          display: none;
+          left: 6px;
+          top: 3px;
+          width: 3px;
+          height: 6px;
+          // border: solid white;
+          border-width: 0 2px 2px 0;
+          transform: rotate(45deg);
+        }
+      }
     }
 
-    p{
+    p {
       width: 34.375rem;
     }
 
-    .icon{
+    .icon {
       margin-right: 0.938rem;
       margin-bottom: 0.625rem;
       transition: background-color 0.1s;
       cursor: pointer;
 
-      &:hover{
+      &:hover {
         color: var(--blue);
       }
     }
   }
+
+  &.completed {
+    p {
+      text-decoration: line-through;
+      opacity: 0.6;
+    }
+  }
 }
-
-
