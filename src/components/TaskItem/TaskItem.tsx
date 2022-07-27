@@ -21,7 +21,8 @@ export function TaskItem({ key, id, content, onDeleteTaskItem, isComplete} : ITa
     <li key={key} className={style.taskItem}>
       <div className={`${style.taskContainer} ${style.isComplete? 'completed' : ''}`}>
         <input
-          type="radio"
+          className={style.checkbox}
+          type="checkbox"
           // checked={isComplete}
         />
         <p>

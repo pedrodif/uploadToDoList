@@ -22,8 +22,14 @@
     border-radius: 8px;
     margin-bottom: 1.25rem;
 
-    input{
+    .checkbox{
+      border: solid 1px;
+      border-radius: 50%;
       cursor: pointer;
+    }
+
+    p{
+      width: 34.375rem;
     }
 
     .icon{
