@@ -19,10 +19,10 @@ export function TaskItem({ key, id, content, onDeleteTaskItem, isComplete} : ITa
 
   return (
     <li key={key} className={style.taskItem}>
-      <div className={style.taskContainer}>
+      <div className={`${style.taskContainer} ${style.isComplete? 'completed' : ''}`}>
         <input
           type="radio"
-          checked={isComplete}
+          // checked={isComplete}
         />
         <p>
           {content}
