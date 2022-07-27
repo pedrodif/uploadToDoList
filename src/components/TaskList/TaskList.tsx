@@ -14,6 +14,7 @@ import { Clipboard } from "../../assets/Clipboard";
 interface ITask {
   id: number;
   content: string;
+  isComplete: boolean;
 }
 
 export function TaskList() {
@@ -25,6 +26,7 @@ export function TaskList() {
       const newTask = {
         id: Math.random(),
         content: newTaskContent,
+        isComplete: false
       };
       setTasks((oldState) => [...oldState, newTask]);
     }
@@ -83,6 +85,7 @@ export function TaskList() {
                 id={task.id}
                 content={task.content}
                 onDeleteTaskItem={deleteTaskItem}
+                isComplete={false}
               />
             );
           })}

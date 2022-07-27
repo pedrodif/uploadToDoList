@@ -9,9 +9,10 @@ interface ITaskProps{
   id: number;
   content: string;
   onDeleteTaskItem: (key: number) => void;
+  isComplete: boolean;
 }
 
-export function TaskItem({ key, id, content, onDeleteTaskItem } : ITaskProps) {
+export function TaskItem({ key, id, content, onDeleteTaskItem, isComplete} : ITaskProps) {
   function handleDeleteTaskItem(id : number) {
     onDeleteTaskItem(id);
   }
@@ -19,7 +20,10 @@ export function TaskItem({ key, id, content, onDeleteTaskItem } : ITaskProps) {
   return (
     <li key={key} className={style.taskItem}>
       <div className={style.taskContainer}>
-        <input type="radio" />
+        <input
+          type="radio"
+          checked={isComplete}
+        />
         <p>
           {content}
         </p>
