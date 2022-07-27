@@ -18,9 +18,11 @@ interface ITask {
 }
 
 export function TaskList() {
+  // States
   const [tasks, setTasks] = useState<ITask[]>([]);
   const [newTaskContent, setNewTaskContent] = useState("");
 
+  // Functions
   function handleCreateNewTask() {
     if (newTaskContent.trim()) {
       const newTask = {
@@ -38,6 +40,16 @@ export function TaskList() {
     setTasks(tasksAfterRemoval);
   }
 
+  function toggleChange(id: number) {
+    const searchId = tasks.findIndex((task) => {
+      return task.id === id;
+    });
+    const updateTasks = [...tasks];
+    updateTasks[searchId].isComplete = !updateTasks[searchId].isComplete;
+    setTasks(updateTasks);
+  }
+
+  // Render
   return (
     <section className={style.taskListContainer}>
       <header className={style.taskListHeader}>
@@ -86,6 +98,7 @@ export function TaskList() {
                 content={task.content}
                 onDeleteTaskItem={deleteTaskItem}
                 isComplete={false}
+                onToggleChange={toggleChange}
               />
             );
           })}
@@ -94,6 +107,4 @@ export function TaskList() {
     </section>
   );
 }
-function value(value: any): void {
-  throw new Error("Function not implemented.");
-}
+
