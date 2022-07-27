@@ -35,12 +35,13 @@ export function TaskItem({
     <li key={key} className={style.taskItem}>
       <div
         className={`${style.taskContainer} ${
-          style.isComplete ? "completed" : ""
+          isComplete ? style.completed : ""
         }`}
       >
         <label className={style.checkboxContainer}>
           <input
             type="checkbox"
+            checked={isComplete}
             onClick={() => handleToggleTaskCompletion(id)}
           />
           <span className={style.checkmark}></span>

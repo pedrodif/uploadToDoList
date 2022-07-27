@@ -107,7 +107,7 @@ export function TaskList() {
                 content={task.content}
                 onDeleteTaskItem={deleteTaskItem}
                 onToggleChange={toggleChange}
-                isComplete
+                isComplete={false}
               />
             );
           })}
