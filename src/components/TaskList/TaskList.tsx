@@ -1,5 +1,5 @@
 // Packages
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 // Components
 import { TaskItem } from "../TaskItem/TaskItem";
@@ -21,8 +21,7 @@ export function TaskList() {
   // States
   const [tasks, setTasks] = useState<ITask[]>([]);
   const [newTaskContent, setNewTaskContent] = useState("");
-  const [countTasks, setCountTasks] = useState<number>(0);
-  const [createdTasks, setCreatedTasks] = useState<number>();
+  const [createdTasksCount, setCreatedTasksCount] = useState<number>();
 
   // Functions
   function handleCreateNewTask() {
@@ -51,25 +50,26 @@ export function TaskList() {
     setTasks(updateTasks);
   }
 
-  function handleCreatedTasksUpdate() {
-    let count = tasks.length;
-    setCreatedTasks(count);
+  function handleStyle() {
+    if (showTasksContainer) {
+      return style.taskItemsArrangement;
+    } else if (showTasksContainerSecondOption) {
+      return style.taskItemsArrangementSecondOption;
+    } else {
+      return style.taskItemsArrangementHidden;
+    }
   }
 
+  // Variables
   const showEmptyMessage = tasks.length === 0;
-
   const showTasksContainer = tasks.length === 1;
   const showTasksContainerSecondOption = tasks.length > 1;
 
-  function handleStyle(){
-    if(showTasksContainer){
-      return style.taskItemsArrangement
-    }else if(showTasksContainerSecondOption){
-      return style.taskItemsArrangementSecondOption
-    }else{
-      return style.taskItemsArrangementHidden
-    }
-  }
+  // Efects
+  useEffect(() => {
+    let count = tasks.length;
+    setCreatedTasksCount(count);
+  }, [tasks]);
 
   // Render
   return (
@@ -83,10 +83,7 @@ export function TaskList() {
         />
         <button
           type="submit"
-          onClick={() => {
-            handleCreateNewTask();
-            handleCreatedTasksUpdate();
-          }}
+          onClick={handleCreateNewTask}
         >
           Criar
           <PlusCircle size={20} />
@@ -98,14 +95,16 @@ export function TaskList() {
           <span className={style.taskListSpanOne}>
             <p>Tarefas criadas</p>
             <div>
-              <p>{createdTasks}</p>
+              <p>{createdTasksCount}</p>
             </div>
           </span>
 
           <span className={style.taskListSpanTwo}>
             <p>Concluídas</p>
             <div>
-              <p>2 de 5</p>
+              <p>2</p>
+              <p>de</p>
+              <p>{createdTasksCount}</p>
             </div>
           </span>
         </div>
@@ -125,9 +124,7 @@ export function TaskList() {
           </div>
         </section>
 
-        <ul
-          className={handleStyle()}
-        >
+        <ul className={handleStyle()}>
           {tasks.map((task) => {
             return (
               <TaskItem
