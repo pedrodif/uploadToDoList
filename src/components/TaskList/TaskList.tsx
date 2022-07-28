@@ -51,14 +51,25 @@ export function TaskList() {
     setTasks(updateTasks);
   }
 
-
-
   function handleCreatedTasksUpdate() {
     let count = tasks.length;
     setCreatedTasks(count);
   }
 
   const showEmptyMessage = tasks.length === 0;
+
+  const showTasksContainer = tasks.length === 1;
+  const showTasksContainerSecondOption = tasks.length > 1;
+
+  function handleStyle(){
+    if(showTasksContainer){
+      return style.taskItemsArrangement
+    }else if(showTasksContainerSecondOption){
+      return style.taskItemsArrangementSecondOption
+    }else{
+      return style.taskItemsArrangementHidden
+    }
+  }
 
   // Render
   return (
@@ -72,7 +83,10 @@ export function TaskList() {
         />
         <button
           type="submit"
-          onClick={() => {handleCreateNewTask(); handleCreatedTasksUpdate()}}
+          onClick={() => {
+            handleCreateNewTask();
+            handleCreatedTasksUpdate();
+          }}
         >
           Criar
           <PlusCircle size={20} />
@@ -111,7 +125,9 @@ export function TaskList() {
           </div>
         </section>
 
-        <ul className={style.taskItemsArrangement}>
+        <ul
+          className={handleStyle()}
+        >
           {tasks.map((task) => {
             return (
               <TaskItem

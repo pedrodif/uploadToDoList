@@ -140,7 +140,17 @@
 
     .taskItemsArrangement {
       width: 46rem;
+      height: 15.25rem;
       padding: 0;
+    }
+    .taskItemsArrangementSecondOption {
+      width: 46rem;
+      height: 100%;
+      padding: 0;
+    }
+    .taskItemsArrangementHidden {
+      visibility: hidden;
+      max-height: 0;
     }
   }
 }
