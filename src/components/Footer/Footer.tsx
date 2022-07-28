@@ -6,7 +6,7 @@ import style from "./footer.module.scss";
 
 export function Footer() {
   return(
-    <div className={style.header}>
+    <div className={style.footer}>
       <Logo />
     </div>
   );

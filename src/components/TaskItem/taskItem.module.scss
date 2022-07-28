@@ -22,34 +22,20 @@
         &:checked {
           & ~ .checkmark {
             background-color: var(--purpleDark);
-          }
+            border-radius: 20px;
 
-          & ~ .checkmark:after {
-            display: block;
+            &:after {
+              display: block;
+              transform: rotate(45deg);
+            }
           }
         }
       }
-
       .checkmark {
-        top: 0;
-        left: 0;
-        width: 16px;
-        height: 16px;
-        background-color: var(--white);
-        outline: none;
-        border-radius: 20px;
+        border-radius: 2px;
 
         &:after {
           content: "";
-          position: absolute;
-          display: none;
-          left: 6px;
-          top: 3px;
-          width: 3px;
-          height: 6px;
-          // border: solid white;
-          border-width: 0 2px 2px 0;
-          transform: rotate(45deg);
         }
       }
     }
@@ -70,7 +56,7 @@
     }
   }
 
-  &.completed {
+  .completed {
     p {
       text-decoration: line-through;
       opacity: 0.6;

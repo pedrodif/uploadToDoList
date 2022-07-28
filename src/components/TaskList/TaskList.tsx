@@ -1,5 +1,5 @@
 // Packages
-import { ChangeEvent, useState } from "react";
+import { useState } from "react";
 
 // Components
 import { TaskItem } from "../TaskItem/TaskItem";
@@ -21,6 +21,8 @@ export function TaskList() {
   // States
   const [tasks, setTasks] = useState<ITask[]>([]);
   const [newTaskContent, setNewTaskContent] = useState("");
+  const [countTasks, setCountTasks] = useState<number>(0);
+  const [createdTasks, setCreatedTasks] = useState<number>();
 
   // Functions
   function handleCreateNewTask() {
@@ -49,7 +51,15 @@ export function TaskList() {
     setTasks(updateTasks);
   }
 
+
+
+  function handleCreatedTasksUpdate() {
+    let count = tasks.length;
+    setCreatedTasks(count);
+  }
+
   const showEmptyMessage = tasks.length === 0;
+
   // Render
   return (
     <section className={style.taskListContainer}>
@@ -60,7 +70,10 @@ export function TaskList() {
           onChange={(e) => setNewTaskContent(e.target.value)}
           value={newTaskContent}
         />
-        <button type="submit" onClick={handleCreateNewTask}>
+        <button
+          type="submit"
+          onClick={() => {handleCreateNewTask(); handleCreatedTasksUpdate()}}
+        >
           Criar
           <PlusCircle size={20} />
         </button>
@@ -71,7 +84,7 @@ export function TaskList() {
           <span className={style.taskListSpanOne}>
             <p>Tarefas criadas</p>
             <div>
-              <p>5</p>
+              <p>{createdTasks}</p>
             </div>
           </span>
 
@@ -107,7 +120,7 @@ export function TaskList() {
                 content={task.content}
                 onDeleteTaskItem={deleteTaskItem}
                 onToggleChange={toggleChange}
-                isComplete={false}
+                isComplete
               />
             );
           })}

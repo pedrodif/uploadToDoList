@@ -9,7 +9,7 @@ interface ITaskProps {
   id: number;
   content: string;
   isComplete: boolean;
-  onDeleteTaskItem: (key: number) => void;
+  onDeleteTaskItem: (id: number) => void;
   onToggleChange: (id: number) => void;
 }
 
@@ -41,7 +41,6 @@ export function TaskItem({
         <label className={style.checkboxContainer}>
           <input
             type="checkbox"
-            checked={isComplete}
             onClick={() => handleToggleTaskCompletion(id)}
           />
           <span className={style.checkmark}></span>
