@@ -22,6 +22,7 @@ export function TaskList() {
   const [tasks, setTasks] = useState<ITask[]>([]);
   const [newTaskContent, setNewTaskContent] = useState("");
   const [createdTasksCount, setCreatedTasksCount] = useState<number>();
+  const [finishedTasks, setFinishedTasks] = useState<number>(0);
 
   // Functions
   function handleCreateNewTask() {
@@ -67,8 +68,19 @@ export function TaskList() {
 
   // Efects
   useEffect(() => {
+    // Created tasks count
     let count = tasks.length;
     setCreatedTasksCount(count);
+
+    // Finished tasks count
+    const finishedCount = tasks.reduce((total: number, task: ITask) => {
+      if(task.isComplete === true){
+        return total + 1;
+      }else{
+        return total;
+      }
+    }, 0)
+    setFinishedTasks(finishedCount);
   }, [tasks]);
 
   // Render
@@ -102,7 +114,7 @@ export function TaskList() {
           <span className={style.taskListSpanTwo}>
             <p>Concluídas</p>
             <div>
-              <p>2</p>
+              <p>{finishedTasks}</p>
               <p>de</p>
               <p>{createdTasksCount}</p>
             </div>
@@ -131,9 +143,9 @@ export function TaskList() {
                 key={task.id}
                 id={task.id}
                 content={task.content}
+                isComplete={task.isComplete}
                 onDeleteTaskItem={deleteTaskItem}
                 onToggleChange={toggleChange}
-                isComplete
               />
             );
           })}

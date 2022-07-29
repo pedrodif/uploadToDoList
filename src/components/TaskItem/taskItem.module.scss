@@ -2,6 +2,17 @@
   list-style: none;
   width: 100%;
 
+  .completed {
+    .textcompleted {
+      text-decoration: line-through;
+      opacity: 0.6;
+    }
+  }
+
+  .notCompleted {
+    opacity: 1
+  }
+
   .taskContainer {
     height: 4.5rem;
     display: flex;
@@ -53,13 +64,6 @@
       &:hover {
         color: var(--blue);
       }
-    }
-  }
-
-  .completed {
-    p {
-      text-decoration: line-through;
-      opacity: 0.6;
     }
   }
 }

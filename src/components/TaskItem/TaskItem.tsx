@@ -8,7 +8,7 @@ interface ITaskProps {
   key: number;
   id: number;
   content: string;
-  isComplete: boolean;
+  isComplete?: boolean;
   onDeleteTaskItem: (id: number) => void;
   onToggleChange: (id: number) => void;
 }
@@ -35,18 +35,20 @@ export function TaskItem({
     <li key={key} className={style.taskItem}>
       <div
         className={`${style.taskContainer} ${
-          isComplete ? style.completed : ""
+          isComplete ? style.completed : style.notCompleted
         }`}
       >
         <label className={style.checkboxContainer}>
           <input
+            placeholder={content}
             type="checkbox"
             onClick={() => handleToggleTaskCompletion(id)}
+            value={content}
           />
           <span className={style.checkmark}></span>
         </label>
 
-        <p>{content}</p>
+        <p className={style.textcompleted}>{content}</p>
         <Trash
           className={style.icon}
           size={18}
