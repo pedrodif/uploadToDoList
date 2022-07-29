@@ -11,6 +11,7 @@ import style from "./taskList.module.scss";
 import { PlusCircle } from "phosphor-react";
 import { Clipboard } from "../../assets/Clipboard";
 
+// Interfaces
 interface ITask {
   id: number;
   content: string;

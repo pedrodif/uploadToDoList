@@ -4,6 +4,7 @@ import style from "./taskItem.module.scss";
 // Assets
 import { Trash } from "phosphor-react";
 
+// Interfaces
 interface ITaskProps {
   key: number;
   id: number;
