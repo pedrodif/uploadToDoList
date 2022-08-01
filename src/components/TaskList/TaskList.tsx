@@ -59,7 +59,7 @@ export function TaskList() {
     } else if(showTasksContainerSecondOption) {
       return style.taskItemsArrangement;
     } else if(showTasksContainerThirdOption) {
-      return style.taskItemsArrangementSecondOption;
+      return style.taskItemsArrangementThirdOption;
     }else{
       return style.taskItemsArrangementHidden;
     }
