@@ -45,7 +45,6 @@ export function TaskList() {
 
   function toggleChange(id: number) {
     const searchId = tasks.findIndex((task) => {
-      console.log(task)
       return task.id === id;
     });
     const updateTasks = [...tasks];
