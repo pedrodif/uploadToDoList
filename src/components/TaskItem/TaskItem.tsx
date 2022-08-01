@@ -39,15 +39,21 @@ export function TaskItem({
           isComplete ? style.completed : style.notCompleted
         }`}
       >
-        <label className={style.checkboxContainer}>
+        <div
+          className={style.checkboxContainer}
+        >
           <input
-            placeholder={content}
             type="checkbox"
+            id={id.toString()}
             onClick={() => handleToggleTaskCompletion(id)}
             value={content}
           />
-          <span className={style.checkmark}></span>
-        </label>
+          <label
+            htmlFor={id.toString()}
+            className={style.checkmark}
+          >
+          </label>
+        </div>
 
         <p className={style.textcompleted}>{content}</p>
         <Trash

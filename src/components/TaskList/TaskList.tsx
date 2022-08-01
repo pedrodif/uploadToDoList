@@ -45,6 +45,7 @@ export function TaskList() {
 
   function toggleChange(id: number) {
     const searchId = tasks.findIndex((task) => {
+      console.log(task)
       return task.id === id;
     });
     const updateTasks = [...tasks];
@@ -53,11 +54,13 @@ export function TaskList() {
   }
 
   function handleStyle() {
-    if (showTasksContainer) {
+    if(showTasksContainer) {
       return style.taskItemsArrangement;
-    } else if (showTasksContainerSecondOption) {
+    } else if(showTasksContainerSecondOption) {
+      return style.taskItemsArrangement;
+    } else if(showTasksContainerThirdOption) {
       return style.taskItemsArrangementSecondOption;
-    } else {
+    }else{
       return style.taskItemsArrangementHidden;
     }
   }
@@ -65,7 +68,8 @@ export function TaskList() {
   // Variables
   const showEmptyMessage = tasks.length === 0;
   const showTasksContainer = tasks.length === 1;
-  const showTasksContainerSecondOption = tasks.length > 1;
+  const showTasksContainerSecondOption = tasks.length === 2;
+  const showTasksContainerThirdOption = tasks.length > 2;
 
   // Efects
   useEffect(() => {
